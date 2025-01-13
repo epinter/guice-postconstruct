@@ -33,6 +33,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -63,7 +64,8 @@ public class PostConstructModule extends AbstractModule {
                 clazz = clazz.getSuperclass();
             }
 
-            postConstructs.reversed().forEach(invokeMethod(obj));
+            Collections.reverse(postConstructs);
+            postConstructs.forEach(invokeMethod(obj));
         }
 
         private <T> Consumer<Method> invokeMethod(T obj) {
